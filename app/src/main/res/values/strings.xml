@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Tiktaktoe</string>
+    <string name="player1">player1:</string>
+    <string name="name">Name</string>
+    <string name="player2">player2:</string>
+    <string name="Name">Name</string>
+    <string name="start">Start</string>
+    <string name="reset">reset</string>
+    <string name="try_again">try again</string>
+</resources>
