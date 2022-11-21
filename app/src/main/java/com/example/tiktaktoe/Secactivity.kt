@@ -126,47 +126,43 @@ class Secactivity : AppCompatActivity(), View.OnClickListener {
         var winner=0
         for (i in 0..7){
             if (firstPlayer.size>=3){
-                if(wincombination[i].contains(firstPlayer[0]) &&
-                    wincombination[i].contains(firstPlayer[1]) &&
-                    wincombination[i].contains(firstPlayer[2])){
+                if(firstPlayer.containsAll(wincombination[i])){
                     winner=1
                     score[0]++
                     p1point.text=score[0].toString()
+                    buttonsdisable()
                     if(score[0]<3){
                         Toast.makeText(this, String.format("%s won this turn", p1name.text.toString()) ,
                             Toast.LENGTH_LONG).show()
-                    }
-                    buttonsdisable()
-                    if(score[0]==3){
+                    }else{
                         Toast.makeText(this, String.format("%s is winner", p1name.text.toString()) ,
                             Toast.LENGTH_LONG).show()
                         tryagain.isEnabled=false
                         score[1]=0
                         score[0]=0
                     }
+
                 }
             }
         }
         if (secondPlayer.size>=3){
             winner=2
             for (i in 0..7){
-                if(wincombination[i].contains(secondPlayer[0]) &&
-                    wincombination[i].contains(secondPlayer[1]) &&
-                    wincombination[i].contains(secondPlayer[2])){
+                if(secondPlayer.containsAll(wincombination[i])){
                     score[1]++
                     p2point.text=score[1].toString()
+                    buttonsdisable()
                     if(score[1]<3){
                         Toast.makeText(this, String.format("%s won this turn", p2name.text.toString()) ,
                             Toast.LENGTH_LONG).show()
-                    }
-                    buttonsdisable()
-                    if (score[1]==3){
+                    }else{
                         Toast.makeText(this, String.format("%s is winner", p2name.text.toString()) ,
                             Toast.LENGTH_LONG).show()
                         tryagain.isEnabled=false
                         score[1]=0
                         score[0]=0
                     }
+
                 }
             }
         }
