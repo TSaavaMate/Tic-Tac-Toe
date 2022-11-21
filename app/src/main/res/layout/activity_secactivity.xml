@@ -9,49 +9,62 @@
     tools:context=".Secactivity">
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        >
-
-        <TextView
-            android:id="@+id/player1name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text=""
-            android:textColor="#880E4F"
-            android:textSize="30sp" />
-        <TextView
-            android:id="@+id/player1point"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="30sp"
-            android:text="" />
-    </TableRow>
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/player2name"
+        <LinearLayout
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/player1name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:textColor="#880E4F"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/player2name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:textColor="#880E4F"
+                android:textSize="30sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text=""
-            android:textColor="#880E4F"
-            android:textSize="30sp" />
-        <TextView
-            android:id="@+id/player2point"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="30sp"
-            android:text="" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/player1point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#880E4F"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/player2point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#880E4F"
+                android:textSize="30sp" />
+
+        </LinearLayout>
     </TableRow>
 
 
     <TableRow
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="141dp"
         android:layout_margin="1dp"
         android:gravity="center">
 
@@ -62,15 +75,15 @@
             android:layout_margin="2dp"
             android:height="50pt"
             android:backgroundTint="#35F400"
-            android:textSize="40sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
         <Button
             android:id="@+id/num2"
             android:layout_width="50pt"
             android:layout_margin="2dp"
-            android:backgroundTint="#35F400"
             android:height="50pt"
+            android:backgroundTint="#35F400"
             android:textColor="@color/white"
             android:textSize="40sp" />
 
@@ -78,8 +91,8 @@
             android:id="@+id/num3"
             android:layout_width="50pt"
             android:layout_margin="2dp"
-            android:backgroundTint="#35F400"
             android:height="50pt"
+            android:backgroundTint="#35F400"
             android:textColor="@color/white"
             android:textSize="40sp" />
 
@@ -156,6 +169,7 @@
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="11dp"
         android:gravity="center">
 
         <Button
@@ -163,6 +177,7 @@
             android:layout_width="15pt"
             android:height="30pt"
             android:backgroundTint="#CE16EF"
+            android:layout_marginEnd="5dp"
             android:text="@string/reset"
             android:textColor="#000000" />
 
@@ -170,6 +185,7 @@
             android:id="@+id/tryagain"
             android:layout_width="15dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:height="30pt"
             android:backgroundTint="#CE16EF"
             android:text="@string/try_again"

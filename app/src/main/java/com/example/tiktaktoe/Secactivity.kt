@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-
 class Secactivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var num1: Button
     private lateinit var num2: Button
@@ -28,15 +27,15 @@ class Secactivity : AppCompatActivity(), View.OnClickListener {
     private  var score: MutableList<Int> = mutableListOf(0,0)
     private var firstPlayer = ArrayList<Int>()
     private var secondPlayer = ArrayList<Int>()
-    private val wincombination = listOf(
-        listOf(1,2,3),
-        listOf(4,5,6),
-        listOf(7,8,9),
-        listOf(1,4,7),
-        listOf(2,5,8),
-        listOf(3,6,9),
-        listOf(1,5,9),
-        listOf(3,5,7)
+    private var wincombination: List<List<Int>> = listOf(
+        listOf(1, 5, 9),
+        listOf(3, 5, 7),
+        listOf(1, 4, 7),
+        listOf(1, 2, 3),
+        listOf(2, 5, 8),
+        listOf(3, 6, 9),
+        listOf(4, 5, 6),
+        listOf(7, 8, 9)
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +104,7 @@ class Secactivity : AppCompatActivity(), View.OnClickListener {
         score.clear()
         p1point.text=""
         p2point.text=""
+        tryagain.isEnabled=true
     }
 
     private fun playgame(buttonNumber: Int, clickedView: Button) {
@@ -122,78 +122,56 @@ class Secactivity : AppCompatActivity(), View.OnClickListener {
         clickedView.isEnabled=false
         check()
     }
-    private fun check()  {
-        var winnerPlayer=0
-        if (firstPlayer.contains(1) && firstPlayer.contains(2) && firstPlayer.contains(3)){
-            winnerPlayer = 1
+    private fun check() {
+        var winner=0
+        for (i in 0..7){
+            if (firstPlayer.size>=3){
+                if(wincombination[i].contains(firstPlayer[0]) &&
+                    wincombination[i].contains(firstPlayer[1]) &&
+                    wincombination[i].contains(firstPlayer[2])){
+                    winner=1
+                    score[0]++
+                    p1point.text=score[0].toString()
+                    if(score[0]<3){
+                        Toast.makeText(this, String.format("%s won this turn", p1name.text.toString()) ,
+                            Toast.LENGTH_LONG).show()
+                    }
+                    buttonsdisable()
+                    if(score[0]==3){
+                        Toast.makeText(this, String.format("%s is winner", p1name.text.toString()) ,
+                            Toast.LENGTH_LONG).show()
+                        tryagain.isEnabled=false
+                        score[1]=0
+                        score[0]=0
+                    }
+                }
+            }
         }
-
-        if (secondPlayer.contains(1) && secondPlayer.contains(2) && secondPlayer.contains(3)){
-            winnerPlayer = 2
+        if (secondPlayer.size>=3){
+            winner=2
+            for (i in 0..7){
+                if(wincombination[i].contains(secondPlayer[0]) &&
+                    wincombination[i].contains(secondPlayer[1]) &&
+                    wincombination[i].contains(secondPlayer[2])){
+                    score[1]++
+                    p2point.text=score[1].toString()
+                    if(score[1]<3){
+                        Toast.makeText(this, String.format("%s won this turn", p2name.text.toString()) ,
+                            Toast.LENGTH_LONG).show()
+                    }
+                    buttonsdisable()
+                    if (score[1]==3){
+                        Toast.makeText(this, String.format("%s is winner", p2name.text.toString()) ,
+                            Toast.LENGTH_LONG).show()
+                        tryagain.isEnabled=false
+                        score[1]=0
+                        score[0]=0
+                    }
+                }
+            }
         }
-
-        if (firstPlayer.contains(4) && firstPlayer.contains(5) && firstPlayer.contains(6)){
-            winnerPlayer = 1
-        }
-
-        if (secondPlayer.contains(4) && secondPlayer.contains(5) && secondPlayer.contains(6)){
-            winnerPlayer = 2
-        }
-
-        if (firstPlayer.contains(7) && firstPlayer.contains(8) && firstPlayer.contains(9)){
-            winnerPlayer = 1
-        }
-
-        if (secondPlayer.contains(7) && secondPlayer.contains(8) && secondPlayer.contains(9)){
-            winnerPlayer = 2
-        }
-
-        if (firstPlayer.contains(1) && firstPlayer.contains(4) && firstPlayer.contains(7)){
-            winnerPlayer = 1
-        }
-
-        if (secondPlayer.contains(1) && secondPlayer.contains(4) && secondPlayer.contains(7)){
-            winnerPlayer = 2
-        }
-
-        if (firstPlayer.contains(2) && firstPlayer.contains(5) && firstPlayer.contains(8)){
-            winnerPlayer = 1
-        }
-
-        if (secondPlayer.contains(2) && secondPlayer.contains(5) && secondPlayer.contains(8)){
-            winnerPlayer = 2
-        }
-        if (firstPlayer.contains(3) && firstPlayer.contains(6) && firstPlayer.contains(9)){
-            winnerPlayer = 1
-        }
-
-        if (secondPlayer.contains(3) && secondPlayer.contains(6) && secondPlayer.contains(9)){
-            winnerPlayer = 2
-        }
-        if (firstPlayer.contains(1) && firstPlayer.contains(5) && firstPlayer.contains(9)){
-            winnerPlayer = 1
-        }
-
-        if (secondPlayer.contains(1) && secondPlayer.contains(5) && secondPlayer.contains(9)){
-            winnerPlayer = 2
-        }
-        if (firstPlayer.contains(3) && firstPlayer.contains(5) && firstPlayer.contains(7)){
-            winnerPlayer = 1
-        }
-
-        if (secondPlayer.contains(3) && secondPlayer.contains(5) && secondPlayer.contains(7)){
-            winnerPlayer = 2
-        }
-        if (winnerPlayer==1){
-            score[0]++
-            p1point.text=score[0].toString()
-            Toast.makeText(this, String.format("%s is winner", p1name.text.toString()) , Toast.LENGTH_LONG).show()
-            buttonsdisable()
-        }else if(winnerPlayer==2){
-            score[1]++
-            p2point.text=score[1].toString()
-            Toast.makeText(this, String.format("%s is winner", p2name.text.toString()) , Toast.LENGTH_LONG).show()
-            buttonsdisable()
+        if(firstPlayer.size+secondPlayer.size==9 && winner==0){
+            Toast.makeText(this, "it's draw ", Toast.LENGTH_LONG).show()
         }
 
     }
@@ -250,34 +228,8 @@ class Secactivity : AppCompatActivity(), View.OnClickListener {
 
 
 }
-//private fun check() {
-//    for (i in 0..7){
-//        if(wincombination[i].contains(secondPlayer[0]) && wincombination[i].contains(secondPlayer[1]) &&
-//            wincombination[i].contains(secondPlayer[2])){
-//            score[1]++
-//            p2point.text=score[1].toString()
-//            Toast.makeText(this, "0 is winner", Toast.LENGTH_SHORT).show()
-//            buttonsdisable()
-//            break
-//        }
-//    }
-//    for (i in 0..7){
-//        if(wincombination[i].contains(firstPlayer[0]) && wincombination[i].contains(firstPlayer[1]) &&
-//            wincombination[i].contains(firstPlayer[2])){
-//            score[0]++
-//            p1point.text=score[0].toString()
-//            Toast.makeText(this, "X is winner", Toast.LENGTH_SHORT).show()
-//            buttonsdisable()
-//            break
-//        }
-//    }
-//    if (firstPlayer.size+secondPlayer.size==9){
-//        Toast.makeText(this, "it's draw", Toast.LENGTH_SHORT).show()
-//    }
-//
-//
-//
-//}
+
+
 
 
 
