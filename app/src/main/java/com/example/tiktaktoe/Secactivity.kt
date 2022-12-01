@@ -146,9 +146,9 @@ class Secactivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         if (secondPlayer.size>=3){
-            winner=2
             for (i in 0..7){
                 if(secondPlayer.containsAll(wincombination[i])){
+                    winner=2
                     score[1]++
                     p2point.text=score[1].toString()
                     buttonsdisable()
